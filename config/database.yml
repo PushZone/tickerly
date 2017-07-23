@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: tickerly_web_production
-  username: tickerly_web
+  username: deploy
   password: 1234
