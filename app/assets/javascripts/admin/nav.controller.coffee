@@ -12,3 +12,5 @@ window.app.controller 'NavCtrl', [
 
     $scope.goCrime = () ->
     window.location.href = "/admin/crime"
+
+]

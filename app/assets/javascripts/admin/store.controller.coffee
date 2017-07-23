@@ -45,3 +45,4 @@ window.app.controller 'StoreCtrl', [
 
     $scope.selectStore = (store) ->
       $scope.selectedStore = store
+]

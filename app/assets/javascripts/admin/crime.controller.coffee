@@ -29,3 +29,5 @@ window.app.controller 'CrimeCtrl', [
 
     $scope.selectStore = (store) ->
       $scope.selectedStore = store
+
+]

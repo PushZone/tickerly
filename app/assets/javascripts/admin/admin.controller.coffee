@@ -9,3 +9,5 @@ window.app.controller 'AdminCtrl', [
 
     $scope.goCrime = () ->
       window.location.href = "/admin/crime"
+
+]
