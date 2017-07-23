@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+  secret_key_base: a52d0243cf86488bba23ebb02065f95345ee30ace6c23266c6ffde2d425c4494db31c5b7fb04c770e068aa33365d6305e4d780d6df07b4aed6a251e47111ba42
   database: tickerly_production
   username: deploy
   password: password
