@@ -1,0 +1,185 @@
+<div ng-controller="StoreCtrl">
+  <div class="btn btn-success">
+    All Store  <%= Store.count %>
+  </div>
+
+  <div class="map store">
+    <div id="map"></div>
+  </div>
+  <div class="new-crime-box store">
+
+    <div ng-show="selectedStore">
+      <h5>Selected store</h5>
+      <div class="row">
+        <input placeholder="latitude" id="emLat" ng-model="selectedStore.lat">
+      </div>
+      <div class="row">
+        <input placeholder="longitude" id="emLgn" ng-model="selectedStore.lon">
+      </div>
+
+      <div class="row">
+        <input placeholder="Store name" id="name" ng-model="selectedStore.name">
+      </div>
+
+      <div class="row">
+        <input placeholder="Desc" id="desc" ng-model="selectedStore.description">
+      </div>
+      
+      <div class="row">
+        <div class="btn btn-success" ng-click="editStore()">Edit store</div>
+      </div>
+      <hr>
+      <h5>Items</h5>
+      <ul>
+        <li ng-repeat="item in selectedStore.items" class="store-item-detail-box">
+          Name: {{item.name}}
+          Discount: {{item.discount}}
+          Point: {{item.point}}
+          <div class="btn btn-danger remove" ng-click="removeItem(item.id)">X</div>
+        </li>
+      </ul>
+    </div>
+
+    <div ng-hide="selectedStore">
+      <h5>Add store location and detail</h5>
+      <div class="row">
+        <input placeholder="latitude" id="mLat" ng-model="newStore.lat">
+      </div>
+      <div class="row">
+        <input placeholder="longitude" id="mLgn" ng-model="newStore.lon">
+      </div>
+
+      <div class="row">
+        <input placeholder="Store name" id="name" ng-model="newStore.name">
+      </div>
+
+      <div class="row">
+        <input placeholder="Desc" id="desc" ng-model="newStore.description">
+      </div>
+      
+      
+      <div class="row">
+        <div class="btn btn-success" ng-click="AddnewStore()">Add new Store</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="add-store-box">
+    <div ng-hide="selectedStore">
+    <h5>Choose store for add item</h5>
+      <div class="store-list-box">
+        <ul>
+          <li ng-repeat="store in storeLists" class="store-detail-box">
+            <span ng-click="selectStore(store)">{{store.name}} ({{store.items.length}})</span>
+            <div class="btn btn-danger pull-right" ng-click="removeStore(store.id)">Delete</div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+    <div class="addnew-box" ng-show="selectedStore">
+      <h5>Add Store item</h5>
+      <div class="row">
+        <input placeholder="Name" ng-model="storeItem.name">
+      </div>
+      <div class="row">
+        <input placeholder="Desc" ng-model="storeItem.description">
+      </div>
+      <div class="row">
+        <input placeholder="point" ng-model="storeItem.point">
+      </div>
+      <div class="row">
+        <input placeholder="discount" id="discount" ng-model="storeItem.discount">
+      </div>
+      
+      
+      <div class="row">
+        <div class="btn btn-success" ng-click="addStoreItem()">Add new item</div>
+        <div class="btn btn-primary pull-right" ng-show="selectedStore" ng-click="selectedStore=null">
+          Back
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  handler = Gmaps.build('Google');
+  console.log(handler)
+  var geocoder = new google.maps.Geocoder();
+
+  newMarker = null
+
+  handler.buildMap({
+      provider: {
+        disableDefaultUI: false,
+        zoom: 10
+        // pass in other Google Maps API options here
+      },
+      internal: {
+        id: 'map'
+      }
+    },
+    function(){
+      markers = handler.addMarkers(<%=raw @hash.to_json %>);
+      if(navigator.geolocation)
+        navigator.geolocation.getCurrentPosition(displayOnMap);
+      google.maps.event.addListener(handler.getMap(), 'click', function(event) {
+        console.log(event.latLng.lat());
+        lat = event.latLng.lat()
+        lng = event.latLng.lng()
+        console.log(event);
+        $('#mLat').val(lat)
+        $('#mLgn').val(lng)
+        $('#emLat').val(lat)
+        $('#emLgn').val(lng)
+        geocoder.geocode({
+          'latLng': event.latLng
+        }, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            if (results[0]) {
+              $('#locationName').val(results[0].formatted_address);
+            }
+          }
+        });
+      });
+    }
+  );
+
+
+  function displayOnMap(position){
+    var marker = handler.addMarker({
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    });
+    handler.map.centerOn(marker);
+  };
+
+  // google.maps.event.addListener("#map", 'click', function( event ){
+  //   alert( "Latitude: "+event.latLng.lat()+" "+", longitude: "+event.latLng.lng() ); 
+  // });
+
+
+</script>
+

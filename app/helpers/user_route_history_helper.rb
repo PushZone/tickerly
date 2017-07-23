@@ -1,0 +1,2 @@
+module UserRouteHistoryHelper
+end

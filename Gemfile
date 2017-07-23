@@ -22,6 +22,9 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
+
+gem 'jquery-rails'
+
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
@@ -30,6 +33,10 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+
+gem 'devise'
+
+gem 'gmaps4rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -42,6 +49,15 @@ group :development, :test do
 end
 
 group :development do
+  gem 'capistrano', '~> 3.7', '>= 3.7.1'
+  gem 'capistrano-rails', '~> 1.2'
+  gem 'capistrano-passenger', '~> 0.2.0'
+
+  # Add this if you're using rbenv
+  gem 'capistrano-rbenv', '~> 2.1'
+
+  # Add this if you're using rvm
+  # gem 'capistrano-rvm'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
