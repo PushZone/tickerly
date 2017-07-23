@@ -3,7 +3,6 @@ window.app.controller 'NavCtrl', [
   '$http'
   '$timeout'
   ($scope, $http, $timeout) ->
-    console.log "sdsds"
     $scope.closeNav = false
 
 
@@ -11,6 +10,6 @@ window.app.controller 'NavCtrl', [
       window.location.href = "/admin/store"
 
     $scope.goCrime = () ->
-    window.location.href = "/admin/crime"
+      window.location.href = "/admin/crime"
 
 ]

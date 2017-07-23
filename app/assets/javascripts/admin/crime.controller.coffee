@@ -12,7 +12,7 @@ window.app.controller 'CrimeCtrl', [
       $scope.crimeLists = response.data.crimes
 
     $scope.goAdmin = () ->
-      window.location.href = "/admin"
+      # window.location.href = "/admin"
 
     $scope.addCrime = () ->
       $scope.newCrime.lat = $('#mLat').val()

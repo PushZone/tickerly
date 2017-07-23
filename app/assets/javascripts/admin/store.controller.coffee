@@ -18,7 +18,7 @@ window.app.controller 'StoreCtrl', [
         console.log response
         $scope.newStore = {lat: '', lon: '', description: '', name: ''}
         # $scope.storeLists.push response.data.table.data
-        window.location.reload()
+        # window.location.reload()
 
     $scope.addStoreItem = () ->
       id = $scope.selectedStore.id
@@ -32,16 +32,16 @@ window.app.controller 'StoreCtrl', [
       $scope.selectedStore.lat = $('#emLat').val()
       $scope.selectedStore.lon = $('#emLgn').val()
       $http.post("/admin/store/#{$scope.selectedStore.id}/edit", $scope.selectedStore).then (response) ->
-        window.location.reload()
+        # window.location.reload()
         
     $scope.removeItem = (id) ->
       $http.put("/admin/store/item/#{id}", {}).then (response) ->
         console.log response
-        window.location.reload()
+        # window.location.reload()
     $scope.removeStore = (id) ->
       $http.put("/admin/store/#{id}", {}).then (response) ->
         console.log response
-        window.location.reload()
+        # window.location.reload()
 
     $scope.selectStore = (store) ->
       $scope.selectedStore = store
