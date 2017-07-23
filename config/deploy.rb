@@ -9,10 +9,12 @@ set :application, 'tickerly-web' #change this to the name of your app
 set :deploy_to, '/home/deploy/tickerly-web'
 set :use_sudo, true
 set :branch, 'develop' #or whichever branch you want to use
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-
 
 append :linked_files, "config/database.yml", "config/secrets.yml"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
+
+
+
 
 
 namespace :deploy do
